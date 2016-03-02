@@ -5,18 +5,11 @@ import com.minimarket.cashiers.Product;
 /**
  * Created by Zachary on 2016/3/2.
  */
-public class DefaultStrategy implements FavorableStrategy {
-    Product product;
+public class DefaultStrategy extends AbstractStrategy {
 
-    public double getFavorablePrice(int amount) {
-        return 0;
+
+    public double getFavorablePrice(Product product, int amount) {
+        return product.getPrice()*amount;
     }
 
-    public double getOrginalPrice(int amount) {
-        return 0;
-    }
-
-    public double getDeviation(int amount) {
-        return 0;
-    }
 }

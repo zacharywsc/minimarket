@@ -11,6 +11,18 @@ import java.util.TreeMap;
 public class ShoppingList {
     Map<Product, Integer> map = new TreeMap<Product, Integer>();
 
+    public ShoppingList(Map<Product, Integer> map) {
+        this.map = map;
+    }
+
+    public ShoppingList(String list) {
+        this.map = map;
+    }
+
+    public ShoppingList() {
+
+    }
+
     void put(Product product) {
         put(product, 1);
     }
