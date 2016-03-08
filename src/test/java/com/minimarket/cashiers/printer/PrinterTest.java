@@ -48,7 +48,7 @@ public class PrinterTest {
 
     @Test
     public void testPrint() throws ExecutionException, InterruptedException {
-        Future<String> printStringFuture = printer.print(new Future<Payment>() {
+        Future<Payment> paymentFuture = new Future<Payment>() {
             public boolean cancel(boolean mayInterruptIfRunning) {
                 return false;
             }
@@ -68,7 +68,8 @@ public class PrinterTest {
             public Payment get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
                 return MockUpDataUtil.payment;
             }
-        });
+        };
+        Future<String> printStringFuture = printer.print(paymentFuture);
         String actual = printStringFuture.get();
         assertEquals(except,actual);
     }

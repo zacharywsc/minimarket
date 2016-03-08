@@ -25,7 +25,13 @@ public class ProductProviderTest {
 
     @Before
     public void setup() throws IOException {
+
+        writeProductToFIle();
         productProvider = new MockProductProvider();
+
+    }
+
+    private void writeProductToFIle() throws IOException {
         List<Product> productList = new LinkedList<Product>();
         productList.add(MockUpDataUtil.cola);
         productList.add(MockUpDataUtil.apple);
@@ -33,8 +39,6 @@ public class ProductProviderTest {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new SimpleModule().setSerializerModifier(new StrategySerializerModifier()));
         mapper.writeValue(new File(MockProductProvider.persistence),productList);
-
-
     }
 
     @Test

@@ -22,7 +22,7 @@ public class ShoppingList {
 
     private int id;
 
-    private ProductProvider productProvider = new MockProductProvider();
+    private static ProductProvider productProvider = new MockProductProvider();
 
     public ShoppingList(Map<Product, Integer> map) {
         this.map = map;
@@ -68,7 +68,7 @@ public class ShoppingList {
 
     }
 
-    public ShoppingList(String list) throws Exception {
+    public ShoppingList(String list) {
         this.id = idGenerator.getAndIncrement();
         List<String> rawStringList = readRawStringList(list);
         for (String item : rawStringList) {
