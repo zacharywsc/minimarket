@@ -1,21 +1,35 @@
 package com.minimarket.cashiers;
 
 import com.minimarket.cashiers.Exception.ProductNotFindException;
-import com.minimarket.cashiers.provider.ProductProvider;
 import com.minimarket.cashiers.provider.MockProductProvider;
+import com.minimarket.cashiers.provider.ProductProvider;
+import org.apache.log4j.Logger;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
 
 /**
  * Created by Zachary on 2016/3/2.
  */
 public class ShoppingList {
+
+    Logger logger = Logger.getLogger(ShoppingList.class);
+
+    private static AtomicInteger idGenerator = new AtomicInteger(0);
+
     private Map<Product, Integer> map = new TreeMap<Product, Integer>();
+
+    private int id;
 
     private ProductProvider productProvider = new MockProductProvider();
 
     public ShoppingList(Map<Product, Integer> map) {
         this.map = map;
+    }
+
+    public int getId() {
+        return id;
     }
 
     static public class ShoppingItem {
@@ -55,6 +69,7 @@ public class ShoppingList {
     }
 
     public ShoppingList(String list) throws Exception {
+        this.id = idGenerator.getAndIncrement();
         List<String> rawStringList = readRawStringList(list);
         for (String item : rawStringList) {
             putStringItem(item);
@@ -81,8 +96,7 @@ public class ShoppingList {
         try {
             product = productProvider.getProduct(itemDetails[0]);
         } catch (ProductNotFindException e) {
-            System.out.print("Product " + itemDetails[0] + " Not find");
-            e.printStackTrace();
+            logger.error("can't find product "+itemDetails[0],e);
         }
         if (itemDetails.length > 1) {
             int amount = Integer.parseInt(itemDetails[1]);
@@ -93,7 +107,7 @@ public class ShoppingList {
     }
 
     public ShoppingList() {
-
+        this.id = idGenerator.getAndIncrement();
     }
 
     void put(Product product) {
@@ -113,7 +127,7 @@ public class ShoppingList {
     void delete(Product product, int amount) throws ProductNotFindException {
         Integer integer = map.get(product);
         if (integer == null) {
-            throw new ProductNotFindException();
+            throw new ProductNotFindException(product.getId());
         } else {
             integer -= amount;
         }

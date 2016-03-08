@@ -77,7 +77,7 @@ public class MockUpDataUtil {
     private static void initCola(Product cola) {
         cola.setCurreny("元");
         cola.setId("ITEM000001");
-        cola.setName("可乐");
+        cola.setName("可口可乐");
         cola.setMeasurement("瓶");
         cola.setPrice(3);
         cola.setFavourableStrategy(new FreeStrategy(2,1));
@@ -85,7 +85,7 @@ public class MockUpDataUtil {
 
     private static void initPayment(Payment payment) {
         payment.curreny = "元";
-        payment.discount = 5.55;
+        payment.discount = 5.550000000000001;
         payment.total = 20.45;
         payment.payItems = new LinkedList<Payment.PayItem>();
         payment.payItems.add(buildShoppingItem1());
@@ -123,7 +123,7 @@ public class MockUpDataUtil {
         Payment.PayItem payItem = new Payment.PayItem();
         payItem.name = "苹果";
         payItem.measurement = "斤";
-        payItem.discount = 0.55;
+        payItem.discount = 0.5500000000000007;
         payItem.amount = 2;
         payItem.totol = 10.45;
         payItem.price = 5.5;
@@ -135,7 +135,7 @@ public class MockUpDataUtil {
         item.name = "可口可乐";
         item.measurement = "瓶";
         item.amount = 1;
-        item.strategy = "买二赠一";
+        item.strategy = "free|2|1";
         return item;
     }
 
@@ -144,7 +144,7 @@ public class MockUpDataUtil {
         item.name = "羽毛球";
         item.measurement = "个";
         item.amount = 2;
-        item.strategy = "买二赠一";
+        item.strategy = "free|2|1";
         return item;
     }
 

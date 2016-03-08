@@ -16,7 +16,7 @@ public class StrategyFactory {
        if(DiscountStrategy.name.equals(name)){
             return constractDiscountStrategy(node);
         }
-        else if(FreeStrategy.name.equals(name)){
+        else if(name.startsWith(FreeStrategy.name)){
             return constractFreeStrategy(node);
         }
         else{

@@ -15,6 +15,7 @@ public class Payment {
         public double totol;
         public double discount;
 
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -83,6 +84,7 @@ public class Payment {
     public String curreny = "";
     public List<PayItem> payItems = new LinkedList<PayItem>();
     public List<DiscountItem> discountItems = new LinkedList<DiscountItem>();
+    public int id;
 
     @Override
     public boolean equals(Object o) {

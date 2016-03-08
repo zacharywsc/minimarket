@@ -22,12 +22,18 @@ public class CountingUnit {
     private int amount;
     private double total;
     private double discount;
+    private String currency;
 
-    public CountingUnit(ShoppingList list){
+    public CountingUnit(ShoppingList list) {
         this.list = list.getShoppingListDetail();
         itemIterator = this.list.iterator();
 
     }
+
+    public String getCurrency() {
+        return currency;
+    }
+
     public double getTotal() {
         return total;
     }
@@ -45,11 +51,12 @@ public class CountingUnit {
         product = current.getProduct();
         strategy = product.getFavourableStrategy();
         amount = current.getAmount();
+        currency = product.getCurreny();
     }
 
     public Payment.DiscountItem createDiscountItem() {
         FavorableStrategy strategy = product.getFavourableStrategy();
-        if (strategy.getName() == FreeStrategy.name) {
+        if (strategy.getName().startsWith(FreeStrategy.name)) {
             Payment.DiscountItem discountItem = new Payment.DiscountItem();
             discountItem.amount = strategy.getUnCountingAmount(current);
             discountItem.name = product.getName();

@@ -1,7 +1,6 @@
 package com.minimarket.cashiers.strategy;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.minimarket.cashiers.Product;
 import com.minimarket.cashiers.ShoppingList;
 import com.minimarket.cashiers.strategy.deserializer.StrategyDeserializer;
 
