@@ -2,14 +2,9 @@ package com.minimarket.cashiers.printer;
 
 import com.minimarket.cashiers.MockUpDataUtil;
 import com.minimarket.cashiers.Payment;
-import com.minimarket.cashiers.Product;
-import com.minimarket.cashiers.provider.DBProvider;
-import com.minimarket.cashiers.provider.MockDBProvider;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 

@@ -2,6 +2,7 @@ package com.minimarket.cashiers.strategy;
 
 import com.minimarket.cashiers.MockUpDataUtil;
 import com.minimarket.cashiers.Product;
+import com.minimarket.cashiers.ShoppingList;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -15,7 +16,8 @@ public class DefaultStrategyTest {
     @Test
     public void testGetFavorablePrice() throws Exception {
         Product product = MockUpDataUtil.apple2;
-        double favorablePrice = product.getFavourableStrategy().getFavorablePrice(product, 10);
+        ShoppingList.ShoppingItem shoppingItem = new ShoppingList.ShoppingItem(product,10);
+        double favorablePrice = product.getFavourableStrategy().getFavorablePrice(shoppingItem);
         assertEquals(55d, favorablePrice, 0);
 
     }
@@ -23,7 +25,8 @@ public class DefaultStrategyTest {
     @Test
     public void testGetOrignalPrice() throws Exception {
         Product product = MockUpDataUtil.apple2;
-        double orignalPrice = product.getFavourableStrategy().getOrginalPrice(product, 10);
+        ShoppingList.ShoppingItem shoppingItem = new ShoppingList.ShoppingItem(product,10);
+        double orignalPrice = product.getFavourableStrategy().getOrginalPrice(shoppingItem);
         assertEquals(55d, orignalPrice, 0);
 
     }
@@ -31,7 +34,8 @@ public class DefaultStrategyTest {
     @Test
     public void testGetDeviation() throws Exception {
         Product product = MockUpDataUtil.apple2;
-        double deviation = product.getFavourableStrategy().getDeviation(product, 10);
+        ShoppingList.ShoppingItem shoppingItem = new ShoppingList.ShoppingItem(product,10);
+        double deviation = product.getFavourableStrategy().getDeviation(shoppingItem);
         assertEquals(0, deviation, 0);
     }
 }

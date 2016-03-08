@@ -13,45 +13,64 @@ public class MockUpDataUtil {
     public static final Product apple2 = new Product();
     public static final Product cola = new Product();
     public static final Product apple = new Product();
+    public static final Product shuttlecocks = new Product();
     public static final Payment payment = new Payment();
     public static final String shoppingListString =
             "[\n" +
                     "    'ITEM000001',\n" +
                     "    'ITEM000001',\n" +
                     "    'ITEM000001',\n" +
-                    "    'ITEM000001',\n" +
-                    "    'ITEM000001',\n" +
-                    "    'ITEM000003-2',\n" +
+                    "    'ITEM000003',\n" +
+                    "    'ITEM000003-5',\n" +
                     "    'ITEM000005',\n" +
                     "    'ITEM000005',\n" +
-                    "    'ITEM000005'\n" +
                     "]"
             ;
-    public static final ShoppingList shoppingList = new ShoppingList(shoppingListString);
+    public static ShoppingList shoppingList;
 
 
     static {
         initCola(cola);
         initApple(apple);
         initApple2(apple2);
+        initShuttlecocks(shuttlecocks);
         initPayment(payment);
+        initShoppingList();
+    }
 
+    private static void initShuttlecocks(Product item) {
+        item.setCurreny("元");
+        item.setId("ITEM000003");
+        item.setName("羽毛球");
+        item.setMeasurement("个");
+        item.setPrice(1);
+        item.setFavourableStrategy(new FreeStrategy(2,1));
+    }
+
+    private static void initShoppingList() {
+        try {
+            shoppingList = new ShoppingList(shoppingListString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static void initApple(Product item) {
-        item.setCurreny("斤");
+        item.setCurreny("元");
         item.setId("ITEM000005");
         item.setName("苹果");
+        item.setMeasurement("斤");
         item.setPrice(5.5);
         item.setFavourableStrategy(new DiscountStrategy(0.95));
     }
 
     private static void initApple2(Product item) {
-        item.setCurreny("斤");
+        item.setCurreny("元");
         item.setId("ITEM000005");
         item.setName("苹果");
         item.setPrice(5.5);
-        item.setFavourableStrategy(new DefaultStrategy());
+        item.setMeasurement("斤");
+        item.setFavourableStrategy(DefaultStrategy.getDefaultStrategy());
 
     }
 
@@ -59,6 +78,7 @@ public class MockUpDataUtil {
         cola.setCurreny("元");
         cola.setId("ITEM000001");
         cola.setName("可乐");
+        cola.setMeasurement("瓶");
         cola.setPrice(3);
         cola.setFavourableStrategy(new FreeStrategy(2,1));
     }
@@ -67,47 +87,47 @@ public class MockUpDataUtil {
         payment.curreny = "元";
         payment.discount = 5.55;
         payment.total = 20.45;
-        payment.shoppingItems = new LinkedList<Payment.ShoppingItem>();
-        payment.shoppingItems.add(buildShoppingItem1());
-        payment.shoppingItems.add(buildShoppingItem2());
-        payment.shoppingItems.add(buildShoppingItem3());
+        payment.payItems = new LinkedList<Payment.PayItem>();
+        payment.payItems.add(buildShoppingItem1());
+        payment.payItems.add(buildShoppingItem2());
+        payment.payItems.add(buildShoppingItem3());
         payment.discountItems = new LinkedList<Payment.DiscountItem>();
         payment.discountItems.add(buildDiscountItem1());
         payment.discountItems.add(buildDiscountItem2());
 
     }
 
-    private static Payment.ShoppingItem buildShoppingItem1() {
-        Payment.ShoppingItem shoppingItem = new Payment.ShoppingItem();
-        shoppingItem.name = "可口可乐";
-        shoppingItem.measurement = "瓶";
-        shoppingItem.discount = 0;
-        shoppingItem.amount = 3;
-        shoppingItem.totol = 6;
-        shoppingItem.price = 3;
-        return shoppingItem;
+    private static Payment.PayItem buildShoppingItem1() {
+        Payment.PayItem payItem = new Payment.PayItem();
+        payItem.name = "可口可乐";
+        payItem.measurement = "瓶";
+        payItem.discount = 0;
+        payItem.amount = 3;
+        payItem.totol = 6;
+        payItem.price = 3;
+        return payItem;
     }
 
-    private static Payment.ShoppingItem buildShoppingItem2() {
-        Payment.ShoppingItem shoppingItem = new Payment.ShoppingItem();
-        shoppingItem.name = "羽毛球";
-        shoppingItem.measurement = "个";
-        shoppingItem.discount = 0;
-        shoppingItem.amount = 6;
-        shoppingItem.totol = 4.00;
-        shoppingItem.price = 1;
-        return shoppingItem;
+    private static Payment.PayItem buildShoppingItem2() {
+        Payment.PayItem payItem = new Payment.PayItem();
+        payItem.name = "羽毛球";
+        payItem.measurement = "个";
+        payItem.discount = 0;
+        payItem.amount = 6;
+        payItem.totol = 4.00;
+        payItem.price = 1;
+        return payItem;
     }
 
-    private static Payment.ShoppingItem buildShoppingItem3() {
-        Payment.ShoppingItem shoppingItem = new Payment.ShoppingItem();
-        shoppingItem.name = "苹果";
-        shoppingItem.measurement = "斤";
-        shoppingItem.discount = 0.55;
-        shoppingItem.amount = 2;
-        shoppingItem.totol = 10.45;
-        shoppingItem.price = 5.5;
-        return shoppingItem;
+    private static Payment.PayItem buildShoppingItem3() {
+        Payment.PayItem payItem = new Payment.PayItem();
+        payItem.name = "苹果";
+        payItem.measurement = "斤";
+        payItem.discount = 0.55;
+        payItem.amount = 2;
+        payItem.totol = 10.45;
+        payItem.price = 5.5;
+        return payItem;
     }
 
     private static Payment.DiscountItem buildDiscountItem1() {

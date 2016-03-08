@@ -1,12 +1,13 @@
 package com.minimarket.cashiers;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by Zachary on 2016/3/2.
  */
 public class Payment {
-    public static class ShoppingItem{
+    public static class PayItem {
         public String name;
         public String measurement;
         public Integer amount;
@@ -19,7 +20,7 @@ public class Payment {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            ShoppingItem that = (ShoppingItem) o;
+            PayItem that = (PayItem) o;
 
             if (Double.compare(that.price, price) != 0) return false;
             if (Double.compare(that.totol, totol) != 0) return false;
@@ -46,7 +47,8 @@ public class Payment {
             return result;
         }
     }
-    public static class DiscountItem{
+
+    public static class DiscountItem {
         public String strategy;
         public String name;
         public String measurement;
@@ -76,11 +78,11 @@ public class Payment {
         }
     }
 
-    public double total;
-    public double discount;
-    public String curreny;
-    public List<ShoppingItem> shoppingItems;
-    public List<DiscountItem> discountItems;
+    public double total = 0;
+    public double discount = 0;
+    public String curreny = "";
+    public List<PayItem> payItems = new LinkedList<PayItem>();
+    public List<DiscountItem> discountItems = new LinkedList<DiscountItem>();
 
     @Override
     public boolean equals(Object o) {
@@ -92,7 +94,7 @@ public class Payment {
         if (Double.compare(payment.total, total) != 0) return false;
         if (Double.compare(payment.discount, discount) != 0) return false;
         if (curreny != null ? !curreny.equals(payment.curreny) : payment.curreny != null) return false;
-        if (shoppingItems != null ? !shoppingItems.equals(payment.shoppingItems) : payment.shoppingItems != null)
+        if (payItems != null ? !payItems.equals(payment.payItems) : payment.payItems != null)
             return false;
         return discountItems != null ? discountItems.equals(payment.discountItems) : payment.discountItems == null;
 
@@ -107,7 +109,7 @@ public class Payment {
         temp = Double.doubleToLongBits(discount);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (curreny != null ? curreny.hashCode() : 0);
-        result = 31 * result + (shoppingItems != null ? shoppingItems.hashCode() : 0);
+        result = 31 * result + (payItems != null ? payItems.hashCode() : 0);
         result = 31 * result + (discountItems != null ? discountItems.hashCode() : 0);
         return result;
     }

@@ -2,6 +2,7 @@ package com.minimarket.cashiers.strategy;
 
 import com.minimarket.cashiers.MockUpDataUtil;
 import com.minimarket.cashiers.Product;
+import com.minimarket.cashiers.ShoppingList;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -14,7 +15,8 @@ public class DiscountStrategyTest {
     @Test
     public void testGetFavorablePrice() throws Exception {
         Product product = MockUpDataUtil.apple;
-        double favorablePrice = product.getFavourableStrategy().getFavorablePrice(product, 2);
+        ShoppingList.ShoppingItem item = new ShoppingList.ShoppingItem(product,2);
+        double favorablePrice = product.getFavourableStrategy().getFavorablePrice(item);
         assertEquals(10.45,favorablePrice,0);
     }
 }
