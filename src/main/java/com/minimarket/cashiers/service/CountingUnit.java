@@ -78,7 +78,7 @@ public class CountingUnit {
         payItem.measurement = product.getMeasurement();
         payItem.price = product.getPrice();
         total = strategy.getFavorablePrice(current);
-        payItem.totol = total;
+        payItem.total = total;
         return payItem;
     }
 }

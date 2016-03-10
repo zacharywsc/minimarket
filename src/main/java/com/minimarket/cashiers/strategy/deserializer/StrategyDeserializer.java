@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class StrategyDeserializer extends JsonDeserializer<FavorableStrategy> {
     @Override
-    public FavorableStrategy deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public FavorableStrategy deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
         FavorableStrategy favorableStrategy = StrategyFactory.createFavorableStrategy(node);
         return favorableStrategy;

@@ -1,12 +1,17 @@
 ***<没钱赚商店>购物清单***
-名称：${name}，数量：3瓶，单价：3.00(元)，小计：6.00(元)
-名称：羽毛球，数量：5个，单价：1.00(元)，小计：4.00(元)
-名称：苹果，数量：2斤，单价：5.50(元)，小计：11.00(元)
+<#list payItems>
+    <#items as payItem>
+名称：${payItem.name}，数量：${payItem.amount}${payItem.measurement}，单价：${payItem.price?string["0.00"]}(${currency})，小计：${payItem.total?string["0.00"]}(${currency})<#if payItem.discount != 0>，节省${payItem.discount?string["0.00"]}(${currency})</#if>
+       </#items>
+</#list>
 ----------------------
 买二赠一商品：
-名称：可口可乐，数量：1瓶
-名称：羽毛球，数量：1个
+<#list discountItems>
+    <#items as discountItem>
+名称：${discountItem.name}，数量：${discountItem.amount}${discountItem.measurement}
+       </#items>
+</#list>
 ----------------------
-总计：21.00(currency)
-节省：4.00(元)
+总计：${total?string["0.00"]}(${currency})
+节省：${discount?string["0.00"]}(${currency})
 **********************

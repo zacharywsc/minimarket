@@ -20,7 +20,7 @@ public class MockProductProvider implements ProductProvider {
 
     Logger logger = Logger.getLogger(MockProductProvider.class);
 
-    public static String persistence = MockProductProvider.class.getResource("/").getPath()+"persistence.txt";
+    public static String persistence = MockProductProvider.class.getResource("/").getPath()+ "persistence.txt";
     private Map<String, Product> productMap = new TreeMap<String, Product>();
 
     public MockProductProvider() {

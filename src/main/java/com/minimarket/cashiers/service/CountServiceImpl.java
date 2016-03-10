@@ -1,14 +1,9 @@
 package com.minimarket.cashiers.service;
 
 import com.minimarket.cashiers.Payment;
-import com.minimarket.cashiers.Product;
 import com.minimarket.cashiers.ShoppingList;
-import com.minimarket.cashiers.strategy.DiscountStrategy;
-import com.minimarket.cashiers.strategy.FavorableStrategy;
-import com.minimarket.cashiers.strategy.FreeStrategy;
 import org.apache.log4j.Logger;
 
-import java.util.Map;
 import java.util.concurrent.*;
 
 /**
@@ -43,7 +38,7 @@ public class CountServiceImpl implements CountService {
             payment.discount += countingUnit.getDiscount();
             payment.total += countingUnit.getTotal();
         }
-        payment.curreny = countingUnit.getCurrency();
+        payment.currency = countingUnit.getCurrency();
         logger.info("processing shopping list completed"+shoppingList.getId());
         return payment;
     }

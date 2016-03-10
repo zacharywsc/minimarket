@@ -1,15 +1,17 @@
 package com.minimarket.cashiers.printer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.minimarket.cashiers.Config;
 import com.minimarket.cashiers.Payment;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.log4j.Logger;
 
-import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.*;
 
 /**
@@ -19,16 +21,17 @@ public class ConsolePrinter implements Printer {
     ExecutorService countingThreadPool = Executors.newFixedThreadPool(10);
     Logger logger = Logger.getLogger(ConsolePrinter.class);
 
-    private Configuration configuration;
+//    private Config  config = new Config();
+    private Configuration freeMarkConfig;
 
     public ConsolePrinter(){
         init();
     }
 
     public void init(){
-        configuration = new Configuration();
-        configuration.setDefaultEncoding("utf-8");
-        configuration.setClassForTemplateLoading(this.getClass(),"");
+        freeMarkConfig = new Configuration();
+        freeMarkConfig.setDefaultEncoding("utf-8");
+        freeMarkConfig.setClassForTemplateLoading(this.getClass(),"/");
     }
 
     public Future<String> print(final Future<Payment> paymentFuture) {
@@ -59,21 +62,33 @@ public class ConsolePrinter implements Printer {
 
     private String formatPayment(Payment payment) {
         if (payment == null) return "";
+        String result = getFormatString(payment);
+        System.out.print(result);
+        return result;
+    }
+
+    private String getFormatString(Payment payment) {
         Template t = null;
         try {
-            t = configuration.getTemplate("printer.ftl");
+//            String templateFileName = config.getValue("format");
+            t = freeMarkConfig.getTemplate("printer.ftl");
+
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("can't open format file",e);
         }
-        HashMap<String,Object> bitch = new HashMap<String, Object>();
-        bitch.put("name","123");
-        StringBuffer buffer = new StringBuffer("test");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String,Object> paymentMap = objectMapper.convertValue(payment,Map.class);
         try {
-            t.process(bitch,new OutputStreamWriter(System.out));
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(byteArrayOutputStream);
+            t.process(paymentMap, outputStreamWriter);
+            String result = new String(byteArrayOutputStream.toByteArray(),"UTF-8");
+            return result;
         } catch (TemplateException e) {
-            e.printStackTrace();
+            logger.error("processing with format error",e);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("processing with format IO error",e);
         }
         return "";
     }

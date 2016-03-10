@@ -84,7 +84,7 @@ public class MockUpDataUtil {
     }
 
     private static void initPayment(Payment payment) {
-        payment.curreny = "元";
+        payment.currency = "元";
         payment.discount = 5.550000000000001;
         payment.total = 20.45;
         payment.payItems = new LinkedList<Payment.PayItem>();
@@ -103,7 +103,7 @@ public class MockUpDataUtil {
         payItem.measurement = "瓶";
         payItem.discount = 0;
         payItem.amount = 3;
-        payItem.totol = 6;
+        payItem.total = 6;
         payItem.price = 3;
         return payItem;
     }
@@ -114,7 +114,7 @@ public class MockUpDataUtil {
         payItem.measurement = "个";
         payItem.discount = 0;
         payItem.amount = 6;
-        payItem.totol = 4.00;
+        payItem.total = 4.00;
         payItem.price = 1;
         return payItem;
     }
@@ -125,7 +125,7 @@ public class MockUpDataUtil {
         payItem.measurement = "斤";
         payItem.discount = 0.5500000000000007;
         payItem.amount = 2;
-        payItem.totol = 10.45;
+        payItem.total = 10.45;
         payItem.price = 5.5;
         return payItem;
     }

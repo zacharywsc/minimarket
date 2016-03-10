@@ -19,7 +19,6 @@ public class PrinterTest {
 
     private Printer printer;
 
-    private Payment payment;
 
     static private final String except = "***<没钱赚商店>购物清单***\n" +
             "名称：可口可乐，数量：3瓶，单价：3.00(元)，小计：6.00(元)\n" +
@@ -37,13 +36,12 @@ public class PrinterTest {
     @Before
     public void setup() {
         initPrinter();
-        payment = MockUpDataUtil.getMockUpPayment1();
+
     }
 
     private void initPrinter() {
         printer = new ConsolePrinter();
     }
-
 
 
     @Test
@@ -71,7 +69,7 @@ public class PrinterTest {
         };
         Future<String> printStringFuture = printer.print(paymentFuture);
         String actual = printStringFuture.get();
-        assertEquals(except,actual);
+        assertEquals(except, actual);
     }
 
 }

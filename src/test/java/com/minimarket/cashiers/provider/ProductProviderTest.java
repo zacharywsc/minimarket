@@ -26,12 +26,12 @@ public class ProductProviderTest {
     @Before
     public void setup() throws IOException {
 
-        writeProductToFIle();
+        writeProductToFile();
         productProvider = new MockProductProvider();
 
     }
 
-    private void writeProductToFIle() throws IOException {
+    private void writeProductToFile() throws IOException {
         List<Product> productList = new LinkedList<Product>();
         productList.add(MockUpDataUtil.cola);
         productList.add(MockUpDataUtil.apple);
